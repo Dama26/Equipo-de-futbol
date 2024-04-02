@@ -1,0 +1,103 @@
+CREATE TABLE jugadores (
+    id_jugador SERIAL PRIMARY KEY,
+    nombre VARCHAR NOT NULL,
+    apellido VARCHAR NOT NULL,
+    partidos_jugados INTEGER NOT NULL
+);
+
+CREATE TABLE equipos (
+    id_equipo SERIAL PRIMARY KEY,
+    nombre VARCHAR NOT NULL,
+    liga VARCHAR NOT NULL
+);
+
+CREATE TABLE compras (
+    id_compra SERIAL PRIMARY KEY,
+    id_equipo INTEGER REFERENCES equipos(id_equipo),
+    fecha_compra DATE NOT NULL,
+    fecha_ingreso DATE,
+    entrada BOOLEAN NOT NULL DEFAULT FALSE
+);
+
+CREATE TABLE jugadores_comprados (
+    id_compra INTEGER REFERENCES compras(id_compra),
+    id_jugador INTEGER REFERENCES jugadores(id_jugador),
+    PRIMARY KEY (id_compra, id_jugador)
+);
+
+INSERT INTO jugadores (nombre, apellido, partidos_jugados)
+VALUES
+    ('Robert', 'Lewandowski', 3),
+    ('Kylian', 'Mbappe', 1),
+    ('Cristiano', 'Dos santos', 5),
+	('Raul','Jiménez', 2),
+	('Lionel','Messi', 2),
+	('Keylor','Navas', 4),
+	('Erling','Haaland', 7),
+	('Kevin','De bruyne', 1),
+	('Karim','Benzema', 6),
+	('Harry','Kane', 1),
+	('John','Stones', 4),
+	('Luka','Modric', 3),
+	('Gabriel','De jesus', 8),
+	('Pablo','Gavira', 10),
+	('Toni','Kroos', 5),
+	('Achraf','Hakimi', 3),
+	('Niclas','Fullkrug',9),
+	('Santiago','Giménez', 5),
+	('Julian','Álvarez', 10),
+	('Vinicius','paixao', 2);
+	
+	
+	select * from jugadores;
+	
+	
+	select * from jugadores WHERE partidos_jugados >5;
+	
+	
+INSERT INTO equipos(nombre, liga) 
+values 
+	('Inter de milan','Serie A'),
+	('Napoli','Serie A'),
+	('Dortmund','Bundesliga'),
+	('Al nassr','Liga saudi'),
+	('wolfburgo','Bundesliga'),
+	('Al raed','liga saudi'),
+	('Monterrey','liga mx'),
+	('Bayer leverkusen','Bundesliga'),
+	('America','liga mx'),
+	('Toluca','liga mx');
+	
+	
+	select * from equipos;
+	
+	
+INSERT INTO compras(id_equipo,fecha_compra,fecha_ingreso,entrada)
+VALUES
+	(1,'2019/02/16','2019/02/16',true),
+	(2,'2021/01/02','2021/02/02',false),
+	(2,'2002/07/26','2002/07/29',false),
+	(4,'2023/11/15','2023/12/18',false),
+	(6,'2024/09/02','2024/09/02',true),
+	(3,'2015/06/12','2017/10/19',false),
+	(1,'2005/12/26','2005/12/26',true),
+	(7,'2022/09/29','2022/09/29',true),
+	(8,'2018/08/11','2019/08/03',false),
+	(3,'2024/01/02','2024/01/02',true);
+	
+select * from compras;
+	
+	
+INSERT INTO jugadores_comprados(id_compra,id_jugador)
+VALUES
+	(1,6),
+	(4,2),
+	(2,8),
+	(4,1),
+	(7,5),
+	(3,4),
+	(6,9),
+	(5,7),
+	(7,9);
+	
+select * from jugadores_comprados;
