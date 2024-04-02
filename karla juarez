@@ -101,3 +101,41 @@ VALUES
 	(7,9);
 	
 select * from jugadores_comprados;
+
+
+---------modificación de tablas--------------
+
+ALTER TABLE jugadores
+RENAME COLUMN partidos_jugados  TO ubicacion;
+
+
+ALTER TABLE jugadores
+RENAME COLUMN ubicacion TO partidos_jugados ;
+
+
+------------eliminación de tablas---------------
+
+ALTER TABLE jugadores
+DROP COLUMN apellido;
+
+
+ALTER TABLE jugadores
+ADD apellido character varying;
+
+
+--------------modificación de registros--------------
+
+UPDATE  jugadores
+SET partidos_jugados = 5
+WHERE nombre = 'Kylian';
+
+
+UPDATE  jugadores
+SET partidos_jugados = 1
+WHERE nombre = 'Kylian';
+
+--------------eliminación de registros------------------
+
+DELETE FROM equipos
+WHERE nombre = 'toluca';
+
